@@ -1,0 +1,5 @@
+*.csv
+*.csv.gz
+*.env
+!metadata.csv
+!prop_pol.csv
