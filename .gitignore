@@ -1,5 +1,7 @@
 *.csv
 *.csv.gz
 *.env
+*.zip
 !metadata.csv
 !prop_pol.csv
+!Train_reduzido.zip
