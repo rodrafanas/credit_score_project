@@ -218,14 +218,8 @@ if btn_predict:
     
     #prepare test set for shap explainability
     
-    # loans = pd.read_csv("input/Train.csv")
     loans = pd.read_csv("input/Train_reduzido.zip")
     
-    # # Comprimir o arquivo CSV (opcional)
-    # import zipfile
-    # with zipfile.ZipFile('input/Train_reduzido.zip', 'w', zipfile.ZIP_DEFLATED) as zipf:
-    #     zipf.write('input/Train_reduzido.csv', arcname='Train_reduzido.csv')
-
     loans.set_index('id',inplace=True)
     
     X = loans.drop(columns=['target'])
