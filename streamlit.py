@@ -12,6 +12,7 @@ from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 import joblib
 import shap
+from streamlit_shap import st_shap
 import streamlit.components.v1 as components
 import warnings 
 warnings.filterwarnings('ignore')
@@ -109,16 +110,16 @@ home_ownership = st.sidebar.radio("Select Home Ownership: ", ('MORTGAGE','OWN','
 def preprocess(loan_amnt, term, home_ownership, emp_length, annual_inc, dti, mths_since_recent_inq, addr_state, bc_open_to_buy, num_op_rev_tl):
     # Pre-processing user input
     user_input_dict={'loan_amnt':[loan_amnt], 'term':[term],
-                    #   'sub_grade':[sub_grade], 
                       'home_ownership':[home_ownership], 
-                      'emp_length':[emp_length], 'annual_inc':[annual_inc], 'dti':[dti],
+                      'emp_length':[emp_length], 'annual_inc':[annual_inc], 
+                      'addr_state':[addr_state],
+                      'dti':[dti],
                 'mths_since_recent_inq':[mths_since_recent_inq], 
-                # 'revol_util':[revol_util], 
-                'addr_state':[addr_state],
                 'bc_open_to_buy':[bc_open_to_buy],
-                'num_op_rev_tl':[num_op_rev_tl]}     
+                'num_op_rev_tl':[num_op_rev_tl]
+                }     
     user_input=pd.DataFrame(data=user_input_dict)
-    
+    user_input_original = user_input.copy()
     # st.dataframe(user_input)
     user_input = pd.get_dummies(user_input, 
                       columns=['home_ownership'],
@@ -137,10 +138,9 @@ def preprocess(loan_amnt, term, home_ownership, emp_length, annual_inc, dti, mth
         user_input[col] = 0
 
     user_input = user_input[l2]
-
-    user_input_original = user_input.copy()
-    # st.dataframe(user_input_original)
-    #user_input=user_input.reshape(1,-1)
+    ## add dummies columns to original input
+    user_input = pd.concat([user_input_original,user_input], axis=1)
+    user_input.drop(columns='home_ownership', inplace=True)
     cleaner_type = {"term": {" 36 months": 1.0, " 60 months": 2.0},
     "addr_state": map_addr_state,
     "emp_length": {"< 1 year": 0.0, '1 year': 1.0, '2 years': 2.0, '3 years': 3.0, '4 years': 4.0,
@@ -148,23 +148,12 @@ def preprocess(loan_amnt, term, home_ownership, emp_length, annual_inc, dti, mth
     '10+ years': 10.0 }
     }
     user_input = user_input.replace(cleaner_type)
-    # user_input.home_ownership.replace({"MORTGAGE":"MORTGAGE","ANY":"OTHERS","OTHER":"OTHERS","NONE":"OTHERS"},inplace=True)
-    
-    # # Indicate all columns used to train 
-    # l1 = user_input.columns.tolist()
-    # l2 = features_used_to_train
-
-    # columns_to_add = list(set(l2)-set(l1))
-    # # Adicionando as novas colunas com valores padrão NaN
-    # for col in columns_to_add:
-    #     user_input[col] = 0
-
-    # user_input = user_input[l2]
     # Normalization 
     # Selecting Numeric Features
     lista_vars_numericas = list(
       metadata[((metadata.Level  == 'ordinal')|(metadata.Level == 'interval')) & (metadata.Role == 'input')]
-      ['Features'])
+      ['Features'])   
+
     user_input[lista_vars_numericas] = (user_input[lista_vars_numericas].fillna(mean_vars_num)).astype(float)
     ## Standarlization
     # Use the loaded scaler to transform the new data
@@ -183,10 +172,6 @@ user_input, user_input_original = preprocess(loan_amnt, term, home_ownership, em
 btn_predict = st.sidebar.button("Predict")
 
 if btn_predict:
-
-    st.dataframe(user_input)
-    st.dataframe(user_input_original)
-
     pred = model.predict_proba(user_input)[:, 1]
 
     if threshold_medium_risk_decision <= pred[0] < threshold_high_risk_decision:
@@ -214,30 +199,19 @@ if btn_predict:
 
     st.dataframe(pol.style.apply(highlight_rows, axis=1))            
 
-
-    
+   
     #prepare test set for shap explainability
-    
-    loans = pd.read_csv("input/Train_reduzido.zip")
-    
+    loans = pd.read_csv("input/Train_reduzido.csv.zip")
     loans.set_index('id',inplace=True)
-    
     X = loans.drop(columns=['target'])
     y = loans[['target']]
     y_ravel = y.values.ravel()
 
+    ##################################
     st.subheader('Result Interpretability - Applicant Level')
     shap.initjs()
-    explainer = shap.Explainer(model, X)
-    shap_values = explainer(user_input)
-    fig = shap.plots.bar(shap_values[0])
-    st.pyplot(fig)
-    #################################
-    from streamlit_shap import st_shap
-
     # compute SHAP values
     explainer = shap.Explainer(model)
-
     # Calcular os valores SHAP para uma única instância
     shap_values_instance = explainer(np.expand_dims(user_input.values[0], axis=0))
 
