@@ -5,11 +5,11 @@ Este projeto realiza a construção de um modelo de concessão de crédito e fin
 Utilizamos a metodologia Crisp-DM que possui 6 passos:
 
 ## 00-BUSINESS_UNDERSTANDING
-    Nesta etapa iremos analisar os objetivos do negócio para utilizar e qual o status sem o modelo de ML. Ou seja, responder a questão: do que o negócio precisa?
+Nesta etapa iremos analisar os objetivos do negócio para utilizar e qual o status sem o modelo de ML. Ou seja, responder a questão: do que o negócio precisa?
 
 ## 01-DATA_UNDERSTANDING
-    Consiste em conhecer mais afundo os dados, selecionar algumas variáveis explicativas interessantes e definir a variável resposta, conhecido como target. Como resultado teremos um dataframe com as variáveis explicativas selecionadas e um arquivo de metadados que resume algumas caracteristicas das variaveis selecionadas para orientar o processo de preparação dos dados.
-    As variáveis selecionadas neste momento são:
+Consiste em conhecer mais afundo os dados, selecionar algumas variáveis explicativas interessantes e definir a variável resposta, conhecido como target. Como resultado teremos um dataframe com as variáveis explicativas selecionadas e um arquivo de metadados que resume algumas caracteristicas das variaveis selecionadas para orientar o processo de preparação dos dados.
+As variáveis selecionadas neste momento são:
     - **loan_amnt:** O valor listado do empréstimo aplicado pelo tomador de empréstimo.
     - **term:** Quantidade de pagamentos do empréstimo, onde os valores são em meses e podem ser 36 ou 60.
     - **int_rate:** A taxa de juros do empréstimo
@@ -27,17 +27,16 @@ Utilizamos a metodologia Crisp-DM que possui 6 passos:
     - **lend_status:** Situação atual do empréstimo (por exemplo, totalmente pago ou debitado), este é o rótulo que iremos prever com o modelo.
 
 ## 02-DATA-PREPARATION
-    Com o objetivo de fazer a validação cruzada no modelo nesta etapa separamos os dados em 3 datasets: treino, validação e teste. A partir do tratamento das variaveis numericas e categoricas do dataset de treino faremos os tratamentos das variáveis explicativas nos dataset de validação e treino. Teremos como resultado 3 datasets, treino, validação e teste prontos para o treino e validação do modelo.  
+Com o objetivo de fazer a validação cruzada no modelo nesta etapa separamos os dados em 3 datasets: treino, validação e teste. A partir do tratamento das variaveis numericas e categoricas do dataset de treino faremos os tratamentos das variáveis explicativas nos dataset de validação e treino. Teremos como resultado 3 datasets, treino, validação e teste prontos para o treino e validação do modelo.  
 
 ## 03-MODELING
-    Iremos modelar 6 modelos de ML de classifição diferentes e como resultado salvaremos todos os modelos treinados para a avaliação na próxima etapa.
+Iremos modelar 6 modelos de ML de classifição diferentes e como resultado salvaremos todos os modelos treinados para a avaliação na próxima etapa.
 
 ## 04-EVALUATION
-    A avaliação dos modelos consiste em três etapas: avaliar as métricas de desempenho,  escollha do melhor modelo, realizar a explicação dos resultados do modelo e construção da política de risco de crédito. Para avaliar o desempenhos dos modelos do poder de discriminação utilizaremos algumas metricas como AUCROC e a matriz de Confusão para escolheremos o melhor modelo e atuaremos na parte de explicabidade dos resultados do modelo tanto a nivel macro como micro. E finalmente, construíremos uma politica de risco de crédito que nos ajudará na tomada de decisão e sinalizaremos também um score mínimo para a concessão de crédito.
+A avaliação dos modelos consiste em três etapas: avaliar as métricas de desempenho,  escollha do melhor modelo, realizar a explicação dos resultados do modelo e construção da política de risco de crédito. Para avaliar o desempenhos dos modelos do poder de discriminação utilizaremos algumas metricas como AUCROC e a matriz de Confusão para escolheremos o melhor modelo e atuaremos na parte de explicabidade dos resultados do modelo tanto a nivel macro como micro. E finalmente, construíremos uma politica de risco de crédito que nos ajudará na tomada de decisão e sinalizaremos também um score mínimo para a concessão de crédito.
 
 ## 05-DEPLOYMENT
-    Com os artefatos do modelo escolhido salvos utilizaremos a Streamlit Cloud fazer a implementação no ambiente cloud e servir o modelo sob uma interface feita utilizado a biblioteca streamlit e disponível em:  [Credit Scoring Dashboard](https://credit-scoring-project.streamlit.app/)
-    Veja como utilizar o simulador logo abaixo.
+Com os artefatos do modelo escolhido salvos utilizaremos a Streamlit Cloud fazer a implementação no ambiente cloud e servir o modelo sob uma interface feita utilizado a biblioteca streamlit e disponível em:  [Credit Scoring Dashboard](https://credit-scoring-project.streamlit.app/). Veja mais detalhes em como utilizar o simulador logo abaixo.
 
 ### Pré-requisitos
 
@@ -46,9 +45,9 @@ Utilizamos a metodologia Crisp-DM que possui 6 passos:
 ### Instalação
 
 1. Clone o repositório do projeto:
-   ```bash
+  ```bash
       git clone https://github.com/rodrafanas/credit_score_project.git
-
+  ```
 
 2. Navegue até o diretório do projeto:
   ```bash
