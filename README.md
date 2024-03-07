@@ -10,6 +10,7 @@ Nesta etapa iremos analisar os objetivos do negócio para utilizar e qual o stat
 ## 01-DATA_UNDERSTANDING
 Consiste em conhecer mais afundo os dados, selecionar algumas variáveis explicativas interessantes e definir a variável resposta, conhecido como target. Como resultado teremos um dataframe com as variáveis explicativas selecionadas e um arquivo de metadados que resume algumas caracteristicas das variaveis selecionadas para orientar o processo de preparação dos dados.
 As variáveis selecionadas neste momento são:
+
 - **loan_amnt:** O valor listado do empréstimo aplicado pelo tomador de empréstimo.
 - **term:** Quantidade de pagamentos do empréstimo, onde os valores são em meses e podem ser 36 ou 60.
 - **int_rate:** A taxa de juros do empréstimo
