@@ -10,21 +10,21 @@ Nesta etapa iremos analisar os objetivos do negócio para utilizar e qual o stat
 ## 01-DATA_UNDERSTANDING
 Consiste em conhecer mais afundo os dados, selecionar algumas variáveis explicativas interessantes e definir a variável resposta, conhecido como target. Como resultado teremos um dataframe com as variáveis explicativas selecionadas e um arquivo de metadados que resume algumas caracteristicas das variaveis selecionadas para orientar o processo de preparação dos dados.
 As variáveis selecionadas neste momento são:
-    - **loan_amnt:** O valor listado do empréstimo aplicado pelo tomador de empréstimo.
-    - **term:** Quantidade de pagamentos do empréstimo, onde os valores são em meses e podem ser 36 ou 60.
-    - **int_rate:** A taxa de juros do empréstimo
-    - **sub_grade:** Pontuação de subclasse de empréstimo atribuída com base no histórico de crédito do tomador de empréstimo
-    - **emp_length:** Tempo de emprego do tomador de empréstimo em anos.
-    - **home_ownership:** O status de propriedade fornecido pelo tomador de empréstimo (por exemplo, aluguel, próprio, hipoteca, etc.)
-    - **anual_inc:** A renda anual autodeclarada fornecida pelo tomador de empréstimo
-    - **addr_state:** O estado fornecido pelo tomador de empréstimo no pedido de empréstimo
-    - **dti:** Razão calculada utilizando o total dos pagamentos mensais da dívida do tomador de empréstimo sobre o total das obrigações da dívida, excluindo hipoteca, dividido pelo rendimento mensal do tomador de empréstimo.
-    - **mths_since_recent_inq:** Meses desde a consulta mais recente
-    - **revol_util:** Taxa de utilização da linha rotativa ou a quantidade de crédito que o tomador de empréstimo está usando em relação a todo o crédito rotativo disponível.
-    - **bc_open_to_buy:** Total aberto para compra em cartões bancários rotativos
-    - **bc_util:** Proporção entre o saldo atual total e o limite de crédito/crédito alto para todas as contas de cartão bancário
-    - **num_op_rev_tl:** Número de contas rotativas abertas
-    - **lend_status:** Situação atual do empréstimo (por exemplo, totalmente pago ou debitado), este é o rótulo que iremos prever com o modelo.
+- **loan_amnt:** O valor listado do empréstimo aplicado pelo tomador de empréstimo.
+- **term:** Quantidade de pagamentos do empréstimo, onde os valores são em meses e podem ser 36 ou 60.
+- **int_rate:** A taxa de juros do empréstimo
+- **sub_grade:** Pontuação de subclasse de empréstimo atribuída com base no histórico de crédito do tomador de empréstimo
+- **emp_length:** Tempo de emprego do tomador de empréstimo em anos.
+- **home_ownership:** O status de propriedade fornecido pelo tomador de empréstimo (por exemplo, aluguel, próprio, hipoteca, etc.)
+- **anual_inc:** A renda anual autodeclarada fornecida pelo tomador de empréstimo
+- **addr_state:** O estado fornecido pelo tomador de empréstimo no pedido de empréstimo
+- **dti:** Razão calculada utilizando o total dos pagamentos mensais da dívida do tomador de empréstimo sobre o total das obrigações da dívida, excluindo hipoteca, dividido pelo rendimento mensal do tomador de empréstimo.
+- **mths_since_recent_inq:** Meses desde a consulta mais recente
+- **revol_util:** Taxa de utilização da linha rotativa ou a quantidade de crédito que o tomador de empréstimo está usando em relação a todo o crédito rotativo disponível.
+- **bc_open_to_buy:** Total aberto para compra em cartões bancários rotativos
+- **bc_util:** Proporção entre o saldo atual total e o limite de crédito/crédito alto para todas as contas de cartão bancário
+- **num_op_rev_tl:** Número de contas rotativas abertas
+- **lend_status:** Situação atual do empréstimo (por exemplo, totalmente pago ou debitado), este é o rótulo que iremos prever com o modelo.
 
 ## 02-DATA-PREPARATION
 Com o objetivo de fazer a validação cruzada no modelo nesta etapa separamos os dados em 3 datasets: treino, validação e teste. A partir do tratamento das variaveis numericas e categoricas do dataset de treino faremos os tratamentos das variáveis explicativas nos dataset de validação e treino. Teremos como resultado 3 datasets, treino, validação e teste prontos para o treino e validação do modelo.  
